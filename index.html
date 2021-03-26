@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Technical Documentation Page FCC</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="nav.js" async></script>
+</head>
+<body>
+  <nav id="navbar" class="navigation" >
+    <header id="main-h">
+      Flexbox - Quick Guide
+    </header>
+    <ul>
+      <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+      <li><a class="nav-link" href="#Basics_Terminology">Basics Terminology</a></li>
+      <li><a class="nav-link" href="#Flex_Containers">Flex Containers</a></li>
+      <li><a class="nav-link" href="#Flex_Direction">Flex Direction</a></li>
+      <li><a class="nav-link" href="#Flex_Wrap">Flex Wrap</a></li>
+      <li><a class="nav-link" href="#Flex_Flow">Flex Flow</a></li>
+      <li><a class="nav-link" href="#Justifying_Contents">Justifying Contents</a></li>
+      <li><a class="nav-link" href="#Align_Item">Align Item</a></li>
+      <li><a class="nav-link" href="#Align_Content">Align Content</a></li>
+      <li><a class="nav-link" href="#Align_Self">Align Self</a></li>
+      <li><a class="nav-link" href="#References">References</a></li>
+    </ul>
+  </nav>
+  <label id="nav-trigger"></label>
+  <main id=main-doc>
+    <section class="main-section" id="Introduction">
+      <header>
+        <h3>Introduction</h3>
+      </header>
+      <p>The <strong>Flexbox Layout</strong> officially called <a href="https://www.w3.org/TR/css-flexbox/" target="_blank">CSS Flexible Box Layout Module</a> is new layout module in CSS3 made to improve the items align, directions and order in the container even when they are with dynamic or even unknown size. The prime characteristic of the flex container is the ability to modify the width or height of its children to fill the available space in the best possible way on different screen sizes.</p>
+      <p>Many designers and developers find this flexbox layout easier to use, as positioning of the elements is simpler thus more complex layouts can be achieved with less code, leading to simpler development process. Flexbox layout algorithm is direction based unlike the block or inline layout which are vertically and horizontally based. This flexbox layout should be used for small application components, while new <a href="https://www.w3.org/TR/css-grid/" target="_blank">CSS Grid Layout Module</a> is emerging to handle the large scale layouts.</p>
+      <p><strong>Note:</strong> Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">Grid</a> layout is intended for larger scale layouts.</p>
+    </section>
+  
+    <section class="main-section" id="Basics_Terminology">
+      <header>
+        <h3>Basics Terminology</h3>
+      </header>
+      <p>Since flexbox is a whole module and not a single property, it involves a lot of things including its whole set of properties. Some of them are meant to be set on the container (parent element, known as “flex container”) whereas the others are meant to be set on the children (said “flex items”).</p>
+      <p>If “regular” layout is based on both block and inline flow directions, the flex layout is based on “flex-flow directions”. Please have a look at this figure from the specification, explaining the main idea behind the flex layout.</p>
+      <figure class="basic-terminology"><img src="https://css-tricks.com/wp-content/uploads/2018/11/00-basic-terminology.svg" alt="A diagram explaining flexbox terminology. The size across the main axis of flexbox is called the main size, the other direction is the cross size."></figure>
+  
+      <p>Items will be laid out following either the <code>main axis</code> (from <code>main-start</code> to <code>main-end</code>) or the cross axis (from <code>cross-start</code> to <code>cross-end</code>).</p>
+      <ul>
+        <li><strong>main axis</strong> – The main axis of a flex container is the primary axis along which flex items are laid out. Beware, it is not necessarily horizontal; it depends on the <code>flex-direction</code> property (see below).</li>
+        <li><strong>main-start | main-end</strong> – The flex items are placed within the container starting from main-start and going to main-end.</li>
+        <li><strong>main size</strong> – A flex item’s width or height, whichever is in the main dimension, is the item’s main size. The flex item’s main size property is either the ‘width’ or ‘height’ property, whichever is in the main dimension.</li>
+        <li><strong>cross axis</strong> – The axis perpendicular to the main axis is called the cross axis. Its direction depends on the main axis direction.</li>
+        <li><strong>cross-start | cross-end</strong> – Flex lines are filled with items and placed into the container starting on the cross-start side of the flex container and going toward the cross-end side.</li>
+        <li><strong>cross size</strong> – The width or height of a flex item, whichever is in the cross dimension, is the item’s cross size. The cross size property is whichever of ‘width’ or ‘height’ that is in the cross dimension.</li>
+      </ul>
+    </section>
+  
+    <section class="main-section" id="Flex_Containers">
+      <header>
+        <h3>Flex Containers</h3>
+      </header>
+      <p>The first step to start using Flexbox is to create a <strong><em>flex container</em></strong>. Children of a flex container are called the <strong><em>flex items</em></strong>, and are laid out inside the flex container using the Flexbox properties. Some of the Flexbox properties apply to the container, others are applied to the flex items.</p>
+      <p>A flex container is created by setting the <code>display</code> property of an element to either <code>flex</code> or <code>inline-flex</code>.</p>
+  
+      <!--<p><b>Usage</b> −</p>
+              <pre class="result">display: flex | inline-flex</pre>-->
+  
+      <pre class="result"><code><span class="token property">display:</span> -webkit-flex | -webkit-inline-flex /_ Safari _/<br><span class="token property">display:</span> flex | inline-flex</code></pre>
+  
+      <p>This property accepts two values:</p>
+      <ul class="list">
+        <li><strong>flex</strong> − Generates a block level flex container.</li>
+        <li><strong>inline-flex</strong> − Generates an inline flex container box.</li>
+      </ul>
+      <p><code>display: flex</code> creates a block-level flex container; <code>display: inline-flex</code> creates an inline-level flex container. The flex container becomes a <strong>flex context</strong> for its direct descendants.</p>
+      <p>Children of a flex container, the flex items, are laid out using the Flexbox layout. Any element outside a flex container is not affected by the Flexbox layout defined on it, and will be rendered as it normally would in the page.</p>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="flex-container" id="flex" onclick="
+                                      var flexContainer=document.getElementById('flexContainer'); 
+                                      flexContainer.style.display = '-webkit-flex'; 
+                                      flexContainer.style.display = 'flex'; 
+                                      " checked>
+          <label for="flex">display: flex;</label>
+          <br>
+          <input type="radio" name="flex-container" id="inline-flex" onclick="
+                                      var flexContainer=document.getElementById('flexContainer'); 
+                                      flexContainer.style.display = '-webkit-inline-flex'; 
+                                      flexContainer.style.display = 'inline-flex'; 
+                                      ">
+          <label for="inline-flex">display: inline-flex;</label>
+        </div>
+      </div>
+      <div class="demo__view"><span class="flexDirItem">Some text</span>
+        <div class="flexContainer" id="flexContainer">
+          <div class="flexDirItem">1</div>
+          <div class="flexDirItem">2</div>
+          <div class="flexDirItem">3</div>
+          <div class="flexDirItem">4</div>
+          <div class="flexDirItem">5</div>
+        </div>
+      </div>
+    </section>
+    <section class="main-section" id="Flex_Direction">
+      <header>
+        <h3>Flex Direction</h3>
+      </header>
+      <p>The <strong>Flexbox Layout</strong> officially called <a href="https://www.w3.org/TR/css-flexbox/" target="_blank">CSS Flexible Box Layout Module</a> is new layout module in CSS3 made to improve the items align, directions and order in the container even when they are with dynamic or even unknown size. The prime characteristic of the flex container is the ability to modify the width or height of its children to fill the available space in the best possible way on different screen sizes.</p>
+      <p>Many designers and developers find this flexbox layout easier to use, as positioning of the elements is simpler thus more complex layouts can be achieved with less code, leading to simpler development process. Flexbox layout algorithm is direction based unlike the block or inline layout which are vertically and horizontally based. This flexbox layout should be used for small application components, while new <a href="https://www.w3.org/TR/css-grid/" target="_blank">CSS Grid Layout Module</a> is emerging to handle the large scale layouts.</p>
+      <p><strong>Note:</strong> Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank">Grid</a> layout is intended for larger scale layouts.</p>
+  
+      <p><b>Usage</b> −</p>
+  
+      <pre class="result"><code><span class="token property">-webkit-flex-direction:</span> row | row-reverse | column | column-reverse /_ Safari _/<br><span class="token property">flex-direction:</span>         row | row-reverse | column | column-reverse</code></pre>
+  
+      <p>This property accepts four values:</p>
+      <ul class="list">
+        <li><strong>row</strong> − Arranges the elements of the container horizontally from left to right.</li>
+        <li><strong>row-reverse</strong> − Arranges the elements of the container horizontally from right to left.</li>
+        <li><strong>column</strong> − Arranges the elements of the container vertically from left to right.</li>
+        <li><strong>column-reverse</strong> − Arranges the elements of the container vertically from right to left.</li>
+      </ul>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="flex-direction" id="row" onclick="
+                                      var flexDirContainer=document.getElementById('flexDirContainer'); 
+                                      flexDirContainer.style.WebkitFlexDirection = 'row'; 
+                                      flexDirContainer.style.flexDirection = 'row'; 
+                                      " checked>
+          <label for="row">flex-direction: row;</label>
+          <br>
+          <input type="radio" name="flex-direction" id="row-reverse" onclick="
+                                      var flexDirContainer=document.getElementById('flexDirContainer'); 
+                                      flexDirContainer.style.WebkitFlexDirection = 'row-reverse'; 
+                                      flexDirContainer.style.flexDirection = 'row-reverse'; 
+                                      ">
+          <label for="row-reverse">flex-direction: row-reverse;</label>
+          <br>
+          <input type="radio" name="flex-direction" id="column" onclick="
+                                      var flexDirContainer=document.getElementById('flexDirContainer'); 
+                                      flexDirContainer.style.WebkitFlexDirection = 'column'; 
+                                      flexDirContainer.style.flexDirection = 'column'; 
+                                      ">
+          <label for="column">flex-direction: column;</label>
+          <br>
+          <input type="radio" name="flex-direction" id="column-reverse" onclick="
+                                      var flexDirContainer=document.getElementById('flexDirContainer'); 
+                                      flexDirContainer.style.WebkitFlexDirection = 'column-reverse'; 
+                                      flexDirContainer.style.flexDirection = 'column-reverse'; 
+                                      ">
+          <label for="column-reverse">flex-direction: column-reverse;</label>
+        </div>
+      </div>
+      <div class="flexDirContainer" id="flexDirContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+      </div>
+    </section>
+    <section class="main-section" id="Flex_Wrap">
+      <header>
+        <h3>Flex Wrap</h3>
+      </header>
+      <p>The flex-wrap property controls whether the flex container is single-line or multi-line, and the direction of the cross-axis, which determines the direction new lines are stacked in.</p>
+      <p>For the values that are not wrap-reverse, the cross-start direction is equivalent to either the inline-start or block-start direction of the current writing mode (whichever is in the cross axis) and the cross-end direction is the opposite direction of cross-start. When flex-wrap is wrap-reverse, the cross-start and cross-end directions are swapped.</p>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">-webkit-flex-wrap:</span>  nowrap | wrap | wrap-reverse /_ Safari _/<br><span class="token property">flex-wrap:</span>          nowrap | wrap | wrap-reverse</code></pre>
+  
+      <p>This property accepts the following values:</p>
+      <ul class="list">
+        <li><strong>nowrap</strong> (default) − All flex items will be on one line</li>
+        <li><strong>wrap</strong> − In case of insufficient space for them, the elements of the container (flexitems) will wrap into additional flex lines from top to bottom.
+          On passing the value wrap to the property flex-wrap, the elements of the container are arranged horizontally from left to right as shown below</li>
+        <li><strong>wrap-reverse</strong> − In case of insufficient space for them, the elements of the container (flex-items) will wrap into additional flex lines from bottom to top.
+          On passing the value wrap-reverse to the property flex-wrap, the elements of the container are arranged horizontally from left to right as shown below</li>
+      </ul>
+  
+      <p>The following example demonstrates the result of passing the values nowrap, wrap and wrap-reverse to the flex-wrap property. Here, we are creating ten boxes with the <strong><a href="#Flex_Direction">flex-direction</a></strong> value <strong>row</strong> and <strong>column</strong>.</p>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="flex-wrap" id="nowrap" onclick="
+                                      var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                                      flexWrapContainer.style.WebkitFlexWrap = 'nowrap';
+                                      flexWrapContainer.style.flexWrap = 'nowrap';
+                                      flexWrapContainer.style.WebkitFlexDirection = 'row';
+                                      flexWrapContainer.style.flexDirection = 'row';
+                                      " checked>
+          <label for="nowrap">flex-wrap: row nowrap;</label>
+          <br>
+          <input type="radio" name="flex-wrap" id="wrap" onclick="
+                                      var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                                      flexWrapContainer.style.WebkitFlexWrap = 'wrap';
+                                      flexWrapContainer.style.flexWrap = 'wrap';
+                                      flexWrapContainer.style.WebkitFlexDirection = 'row';
+                                      flexWrapContainer.style.flexDirection = 'row';
+                                      ">
+          <label for="wrap">flex-wrap: row wrap;</label>
+          <br>
+          <input type="radio" name="flex-wrap" id="wrap-reverse" onclick=" 
+                                      var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                                      flexWrapContainer.style.WebkitFlexWrap = 'wrap-reverse';
+                                      flexWrapContainer.style.flexWrap = 'wrap-reverse';
+                                      flexWrapContainer.style.WebkitFlexDirection = 'row';
+                                      flexWrapContainer.style.flexDirection = 'row';
+                                      ">
+          <label for="wrap-reverse">flex-wrap: row wrap-reverse;</label>
+  
+          <br><br>
+  
+          <input type="radio" name="flex-wrap" id="nowrapCol" onclick="
+                              var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                              flexWrapContainer.style.WebkitFlexWrap = 'nowrap';
+                              flexWrapContainer.style.flexWrap = 'nowrap';
+                              flexWrapContainer.style.WebkitFlexDirection = 'column';
+                              flexWrapContainer.style.flexDirection = 'column';
+                              flexWrapContainer.style.height = 'column';
+                              ">
+          <label for="nowrapCol">flex-wrap: column nowrap;</label>
+          <br>
+          <input type="radio" name="flex-wrap" id="wrapCol" onclick="
+                                      var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                                      flexWrapContainer.style.WebkitFlexWrap = 'wrap';
+                                      flexWrapContainer.style.flexWrap = 'wrap';
+                                      flexWrapContainer.style.WebkitFlexDirection = 'column';
+                                      flexWrapContainer.style.flexDirection = 'column';
+                                      ">
+          <label for="wrapCol">flex-wrap: column wrap;</label>
+          <br>
+          <input type="radio" name="flex-wrap" id="wrap-reverseCol" onclick=" 
+                                      var flexWrapContainer=document.getElementById('flexWrapContainer'); 
+                                      flexWrapContainer.style.WebkitFlexWrap = 'wrap-reverse';
+                                      flexWrapContainer.style.flexWrap = 'wrap-reverse';
+                                      flexWrapContainer.style.WebkitFlexDirection = 'column';
+                                      flexWrapContainer.style.flexDirection = 'column';
+                                      ">
+          <label for="wrap-reverseCol">flex-wrap: column wrap-reverse;</label>
+        </div>
+      </div>
+      <div class="flexWrapContainer" id="flexWrapContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+        <div class="flexDirItem">6</div>
+        <div class="flexDirItem">7</div>
+        <div class="flexDirItem">8</div>
+        <div class="flexDirItem">9</div>
+        <div class="flexDirItem">10</div>
+      </div>
+    </section>
+    <section class="main-section" id="Flex_Flow">
+      <header>
+        <h3>Flex Flow</h3>
+      </header>
+      <p>The flex-flow property is a shorthand for setting the flex-direction and flex-wrap properties, which together define the flex container’s main and cross axes.<br>
+        The initial value of the flex-flow property is the concatenation of the initial values of the flex-direction and flex-wrap properties:</p>
+      <pre class="result"><code><span class="token property">flex-flow:</span> row nowrap;</code></pre>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">flex-flow:</span> &lt;&apos;flex-direction&apos;&gt; &lt;&apos;flex-wrap&apos;&gt;</code></pre>
+  
+      <p>This property accepts the following values:</p>
+      <ul class="list">
+        <li><strong>row nowrap</strong> (default) − All flex items will be on one line</li>
+        <li><strong>row wrap</strong> − Flex items wrap. Flex lines stack in the direction of the cross axis (which is top-to-bottom in a LTR language)</li>
+        <li><strong>row wrap-reverse</strong> − Same as row wrap, except flex items wrap in the opposite direction of the cross axis</li>
+      </ul>
+  
+      <p>The following example demonstrates the result of passing the values nowrap, wrap and wrap-reverse to the flex-flow property. Here, we are creating ten boxes with the <strong><a href="#Flex_Direction">flex-direction</a></strong> value <strong>row</strong> and <strong>column</strong>.</p>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="flex-wrapFlow" id="nowrapFlow" onclick="
+                                      var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                                      flexFlowContainer.style.webkitFlexFlow = 'nowrap';
+                                      flexFlowContainer.style.flexFlow = 'nowrap';
+                                      flexFlowContainer.style.WebkitFlexDirection = 'row';
+                                      flexFlowContainer.style.flexDirection = 'row';
+                                      " checked>
+          <label for="nowrapFlow">flex-flow: row nowrap;</label>
+          <br>
+          <input type="radio" name="flex-wrapFlow" id="wrapFlow" onclick="
+                                      var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                                      flexFlowContainer.style.webkitFlexFlow = 'wrap';
+                                      flexFlowContainer.style.flexFlow = 'wrap';
+                                      flexFlowContainer.style.WebkitFlexDirection = 'row';
+                                      flexFlowContainer.style.flexDirection = 'row';
+                                      ">
+          <label for="wrapFlow">flex-flow: row wrap;</label>
+          <br>
+          <input type="radio" name="flex-wrapFlow" id="wrap-reverseFlow" onclick=" 
+                                      var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                                      flexFlowContainer.style.webkitFlexFlow = 'wrap-reverse';
+                                      flexFlowContainer.style.flexFlow = 'wrap-reverse';
+                                      flexFlowContainer.style.WebkitFlexDirection = 'row';
+                                      flexFlowContainer.style.flexDirection = 'row';
+                                      ">
+          <label for="wrap-reverseFlow">flex-flow: row wrap-reverse;</label>
+  
+          <br><br>
+  
+          <input type="radio" name="flex-wrapFlow" id="nowrapFlowCol" onclick="
+                              var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                              flexFlowContainer.style.webkitFlexFlow = 'nowrap';
+                              flexFlowContainer.style.flexFlow = 'nowrap';
+                              flexFlowContainer.style.WebkitFlexDirection = 'column';
+                              flexFlowContainer.style.flexDirection = 'column';
+                              flexFlowContainer.style.height = 'column';
+                              ">
+          <label for="nowrapFlowCol">flex-flow: column nowrap;</label>
+          <br>
+          <input type="radio" name="flex-wrapFlow" id="wrapFlowCol" onclick="
+                                      var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                                      flexFlowContainer.style.webkitFlexFlow = 'wrap';
+                                      flexFlowContainer.style.flexFlow = 'wrap';
+                                      flexFlowContainer.style.WebkitFlexDirection = 'column';
+                                      flexFlowContainer.style.flexDirection = 'column';
+                                      ">
+          <label for="wrapFlowCol">flex-flow: column wrap;</label>
+          <br>
+          <input type="radio" name="flex-wrapFlow" id="wrap-reverseFlowCol" onclick=" 
+                                      var flexFlowContainer=document.getElementById('flexFlowContainer'); 
+                                      flexFlowContainer.style.webkitFlexFlow = 'wrap-reverse';
+                                      flexFlowContainer.style.flexFlow = 'wrap-reverse';
+                                      flexFlowContainer.style.WebkitFlexDirection = 'column';
+                                      flexFlowContainer.style.flexDirection = 'column';
+                                      ">
+          <label for="wrap-reverseFlowCol">flex-flow: column wrap-reverse;</label>
+        </div>
+      </div>
+      <div class="flexFlowContainer" id="flexFlowContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+        <div class="flexDirItem">6</div>
+        <div class="flexDirItem">7</div>
+        <div class="flexDirItem">8</div>
+        <div class="flexDirItem">9</div>
+        <div class="flexDirItem">10</div>
+      </div>
+  
+      <p>Note that the <a href="https://www.w3.org/TR/css-flexbox-1/#propdef-flex-flow" target="_blank">flex-flow</a> directions are <a href="https://www.w3.org/TR/css-writing-modes-4/#writing-mode" target="_blank">writing mode</a> sensitive. In vertical Japanese, for example, a row flex container lays out its contents from top to bottom, as seen in this example:</p>
+      <p><img src="https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2014/10/flex-flow-example.png" alt="flex-flow writing-mode"></p>
+    </section>
+    <section class="main-section" id="Justifying_Contents">
+      <header>
+        <h3>Justifying Contents</h3>
+      </header>
+      <p>This defines the alignment along the main axis. It helps distribute extra free space leftover when either all the flex items on a line are inflexible, or are flexible but have reached their maximum size. It also exerts some control over the alignment of items when they overflow the line.</p>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">-webkit-justify-content:</span> flex-start (default) | flex-end | center | space-between | space-around | space-evenly /_ Safari _/<br><span class="token property">justify-content:</span>         flex-start (default) | flex-end | center | space-between | space-around | space-evenly</code></pre>
+  
+      <p>The following figure helps understand what the justify-content property actually does:</p>
+      <ul class="list">
+        <li><strong>flex-start</strong> (default) − items are packed toward the start of the flex-direction</li>
+        <li><strong>flex-end</strong> − items are packed toward the end of the flex-direction</li>
+        <li><strong>center</strong> − items are centered along the line</li>
+        <li><strong>space-between</strong> − items are evenly distributed in the line; first item is on the start line, last item on the end line</li>
+        <li><strong>space-around</strong> − items are evenly distributed in the line with equal space around them. Note that visually the spaces aren’t equal, since all the items have equal space on both sides. The first item will have one unit of space against the container edge, but two units of space between the next item because that next item has its own spacing that applies</li>
+        <li><strong>space-evenly</strong> (added in Box Alignment) − items are distributed so that the spacing between any two items (and the space to the edges) is equal</li>
+      </ul>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="justify-content" id="flex-startJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'flex-start'; 
+                              JCContainer.style.justifyContent = 'flex-start'; 
+                              " checked>
+          <label for="flex-startJC">justify-content: flex-start;</label>
+          <br>
+          <input type="radio" name="justify-content" id="flex-endJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'flex-end'; 
+                              JCContainer.style.justifyContent = 'flex-end'; 
+                              ">
+          <label for="flex-endJC">justify-content: flex-end;</label>
+          <br>
+          <input type="radio" name="justify-content" id="centerJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'center'; 
+                              JCContainer.style.justifyContent = 'center'; 
+                              ">
+          <label for="centerJC">justify-content: center;</label>
+          <br>
+          <input type="radio" name="justify-content" id="space-betweenJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'space-between';
+                              JCContainer.style.justifyContent = 'space-between';
+                              ">
+          <label for="space-betweenJC">justify-content: space-between;</label>
+          <br>
+          <input type="radio" name="justify-content" id="space-aroundJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'space-around'; 
+                              JCContainer.style.justifyContent = 'space-around'; 
+                              ">
+          <label for="space-aroundJC">justify-content: space-around;</label>
+          <br>
+          <input type="radio" name="justify-content" id="space-evenlyJC" onclick="
+                              var JCContainer=document.getElementById('JCContainer'); 
+                              JCContainer.style.WebkitJustifyContent = 'space-evenly'; 
+                              JCContainer.style.justifyContent = 'space-evenly'; 
+                              ">
+          <label for="space-evenlyJC">justify-content: space-evenly;</label>
+        </div>
+      </div>
+      <div class="JCContainer" id="JCContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+      </div>
+    </section>
+    <section class="main-section" id="Align_Item">
+      <header>
+        <h3>Align Item</h3>
+      </header>
+      <p>Flex items can be aligned in the cross axis of the current line of the flex container, similar to <a href="#justify_content">justify-content</a> but in the perpendicular direction. This property sets the default alignment for all flex items, including the anonymous ones</p>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">-webkit-align-items:</span> stretch | flex-start | flex-end | center | baseline; /_ Safari _/<br><span class="token property">align-items:</span>         stretch | flex-start | flex-end | center | baseline</code></pre>
+  
+      <p>This property accepts the following values:</p>
+      <ul class="list">
+        <li><strong>stretch</strong> (default) − stretch to fill the container (still respect min-width/max-width)</li>
+        <li><strong>flex-start</strong> − All flex items will be on one line</li>
+        <li><strong>flex-end</strong> − All flex items will be on one line</li>
+        <li><strong>center</strong> − Flex items wrap. Flex lines stack in the direction of the cross axis (which is top-to-bottom in a LTR language)</li>
+        <li><strong>baseline</strong> − Same as row wrap, except flex items wrap in the opposite direction of the cross axis</li>
+      </ul>
+  
+      <p>The following example demonstrates the result of passing the values nowrap, wrap and wrap-reverse to the flex-flow property. Here, we are creating ten boxes with the <strong><a href="#Flex_Direction">flex-direction</a></strong> value <strong>row</strong> and <strong>column</strong>.</p>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="align-items" id="stretchAI" onclick="
+                              var AIContainer=document.getElementById('AIContainer'); 
+                              AIContainer.style.WebkitAlignItems = 'stretch'; 
+                              AIContainer.style.alignItems = 'stretch'; 
+                              " checked>
+          <label for="stretchAI">align-items: stretch;</label>
+          <br>
+          <input type="radio" name="align-items" id="flex-startAI" onclick="
+                              var AIContainer=document.getElementById('AIContainer'); 
+                              AIContainer.style.WebkitAlignItems = 'flex-start'; 
+                              AIContainer.style.alignItems = 'flex-start'; 
+                              ">
+          <label for="flex-startAI">align-items: flex-start;</label>
+          <br>
+          <input type="radio" name="align-items" id="flex-endAI" onclick="
+                              var AIContainer=document.getElementById('AIContainer'); 
+                              AIContainer.style.WebkitAlignItems = 'flex-end'; 
+                              AIContainer.style.alignItems = 'flex-end'; 
+                              ">
+          <label for="flex-endAI">align-items: flex-end;</label>
+          <br>
+          <input type="radio" name="align-items" id="centerAI" onclick="
+                              var AIContainer=document.getElementById('AIContainer'); 
+                              AIContainer.style.WebkitAlignItems = 'center'; 
+                              AIContainer.style.alignItems = 'center'; 
+                              ">
+          <label for="centerAI">align-items: center;</label>
+          <br>
+          <input type="radio" name="align-items" id="baselineAI" onclick="
+                              var AIContainer=document.getElementById('AIContainer'); 
+                              AIContainer.style.WebkitAlignItems = 'baseline';
+                              AIContainer.style.alignItems = 'baseline';
+                              ">
+          <label for="baselineAI">align-items: baseline;</label>
+        </div>
+      </div>
+      <div class="AIContainer" id="AIContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+      </div>
+  
+    </section>
+    <section class="main-section" id="Align_Content">
+      <header>
+        <h3>Align Content</h3>
+      </header>
+      <p>This aligns a flex container’s lines within when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.</p>
+      <p><strong>Note:</strong> this property has no effect when there is only one line of flex items.</p>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">-webkit-align-content:</span> stretch | flex-start | flex-end | center | space-between | space-around | space-evenly; /_ Safari _/<br><span class="token property">align-content:</span>         stretch | flex-start | flex-end | center | space-between | space-around | space-evenly</code></pre>
+  
+      <p>The following figure helps understand what the justify-content property actually does:</p>
+      <ul class="list">
+        <li><strong>stretch</strong> (default) − lines stretch to take up the remaining space.</li>
+        <li><strong>flex-start</strong> − items packed to the start of the container. The (more supported) flex-start honors the flex-direction while start honors the writing-mode direction.</li>
+        <li><strong>flex-end</strong> − items packed to the end of the container. The (more support) flex-end honors the flex-direction while end honors the writing-mode direction.</li>
+        <li><strong>center</strong> − items centered in the container.</li>
+        <li><strong>space-between</strong> − items evenly distributed; the first line is at the start of the container while the last one is at the end.</li>
+        <li><strong>space-around</strong> − items evenly distributed with equal space around each line.</li>
+      </ul>
+  
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="align-content" id="stretchAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'stretch'; 
+                              ACContainer.style.alignContent = 'stretch'; 
+                              " checked>
+          <label for="stretchAC">align-content: stretch;</label>
+          <br>
+          <input type="radio" name="align-content" id="flex-startAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'flex-start'; 
+                              ACContainer.style.alignContent = 'flex-start'; 
+                              ">
+          <label for="flex-startAC">align-content: flex-start;</label>
+          <br>
+          <input type="radio" name="align-content" id="flex-endAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'flex-end'; 
+                              ACContainer.style.alignContent = 'flex-end'; 
+                              ">
+          <label for="flex-endAC">align-content: flex-end;</label>
+          <br>
+          <input type="radio" name="align-content" id="centerAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'center'; 
+                              ACContainer.style.alignContent = 'center'; 
+                              ">
+          <label for="centerAC">align-content: center;</label>
+          <br>
+          <input type="radio" name="align-content" id="space-betweenAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'space-between';
+                              ACContainer.style.alignContent = 'space-between';
+                              ">
+          <label for="space-betweenAC">align-content: space-between;</label>
+          <br>
+          <input type="radio" name="align-content" id="space-aroundAC" onclick="
+                              var ACContainer=document.getElementById('ACContainer'); 
+                              ACContainer.style.webkitAlignContent = 'space-around';
+                              ACContainer.style.alignContent = 'space-around';
+                              ">
+          <label for="space-aroundAC">align-content: space-around;</label>
+        </div>
+      </div>
+      <div class="ACContainer" id="ACContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+        <div class="flexDirItem">6</div>
+        <div class="flexDirItem">7</div>
+        <div class="flexDirItem big">8</div>
+        <div class="flexDirItem">9</div>
+        <div class="flexDirItem big">10</div>
+        <div class="flexDirItem big">11</div>
+        <div class="flexDirItem big">12</div>
+        <div class="flexDirItem big">13</div>
+        <div class="flexDirItem big">14</div>
+        <div class="flexDirItem big">15</div>
+      </div>
+    </section>
+    <section class="main-section" id="Align_Self">
+      <header>
+        <h3>Align Self</h3>
+      </header>
+      <p>The align-self property allows this default alignment to be overridden for individual flex items. In order to fully understand the values and concepts behind this property, please see the <a href="#Align_Item">align-items</a> property description.</p>
+      <p><strong>Note:</strong> this property has no effect when there is only one line of flex items.</p>
+  
+      <p><b>Usage</b> −</p>
+      <pre class="result"><code><span class="token property">-webkit-align-self:</span> auto | flex-start | flex-end | center | baseline | stretch; /_ Safari _/<br><span class="token property">align-self:</span>         auto | flex-start | flex-end | center | baseline | stretch</code></pre>
+  
+      <p>The possible values have the following meanings:</p>
+      <ul class="list">
+        <li><strong>auto</strong> (default) − A value of auto computes to the value of align-items on the element’s container, or stretch if the element has no parent. In other words, the item will be aligned based on the default value or the value specified for the align-items property.</li>
+        <li><strong>flex-start</strong> − The flex item is packed toward the cross-start of the line.</li>
+        <li><strong>flex-end</strong> − the flex item is packed toward the cross-end of the line.</li>
+        <li><strong>center</strong> − The flex item’s margin box is centered in the cross axis within the line. (If the cross size of the flex line is less than that of the flex item, it will overflow equally in both directions.)</li>
+        <li><strong>baseline</strong> − If the flex item’s inline axis is the same as the cross axis, this value is identical to flex-start. Otherwise, it participates in baseline alignment: all participating flex items on the line are aligned such that their baselines align, and the item with the largest distance between its baseline and its cross-start margin edge is placed flush against the cross-start edge of the line.</li>
+        <li><strong>stretch</strong> − The flex item is stretched out from the cross-start to the cross-end, while still respecting the constraints imposed by min-height/min-width/max-height/max-width. Note that if the flex container’s height is constrained this value may cause the contents of the flex item to overflow the item.</li>
+      </ul>
+      <div class="flexContainerMenu">
+        <div class="flexMenuControls">
+          <input type="radio" name="align-self" id="autoAS" onclick="
+                              var ASContainer=document.getElementById('threeAS'); 
+                              ASContainer.style.webkitAlignSelf = 'auto'; 
+                              ASContainer.style.alignSelf = 'auto'; 
+                              " checked>
+          <label for="autoAS">align-self: auto;</label>
+          <br>
+          <input type="radio" name="align-self" id="flex-startAS" onclick="
+                              var ASContainer=document.getElementById('threeAS'); 
+                              ASContainer.style.webkitAlignSelf = 'flex-start'; 
+                              ASContainer.style.alignSelf = 'flex-start'; 
+                              ">
+          <label for="flex-startAS">align-self: flex-start;</label>
+          <br>
+          <input type="radio" name="align-self" id="flex-endAS" onclick="
+                              var ASContainer=document.getElementById('threeAS'); 
+                              ASContainer.style.webkitAlignSelf = 'flex-end'; 
+                              ASContainer.style.alignSelf = 'flex-end'; 
+                              ">
+          <label for="flex-endAS">align-self: flex-end;</label>
+          <br>
+          <input type="radio" name="align-self" id="centerAS" onclick="
+                              var ASContainer=document.getElementById('threeAS'); 
+                              ASContainer.style.webkitAlignSelf = 'center'; 
+                              ASContainer.style.alignSelf = 'center'; 
+                              ">
+          <label for="centerAS">align-self: center;</label>
+          <br>
+          <input type="radio" name="align-self" id="baselineAS" onclick="
+                              var ASContainer=document.getElementById('threeAS'); 
+                              ASContainer.style.webkitAlignSelf = 'baseline';
+                              ASContainer.style.alignSelf = 'baseline';
+                              ">
+          <label for="baselineAS">align-self: baseline;</label>
+          <br>
+          <input type="radio" name="align-self" id="stretchAS" onclick="
+                              var ASContainer=document.getElementById('threeAS    '); 
+                              ASContainer.style.webkitAlignSelf = 'stretch';
+                              ASContainer.style.alignSelf = 'stretch';
+                              ">
+          <label for="stretchAS">align-self: stretch;</label>
+        </div>
+      </div>
+      <div class="ASContainer" id="ASContainer">
+        <div class="flexDirItem">1</div>
+        <div class="flexDirItem">2</div>
+        <div class="flexDirItem" id="threeAS">3</div>
+        <div class="flexDirItem">4</div>
+        <div class="flexDirItem">5</div>
+        <div class="line" id="line"></div>
+      </div>
+    </section>
+    <section class="main-section" id="References">
+      <header>
+        <h3>References</h3>
+      </header>
+      <article>
+        <ul>
+          <li>
+            <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">A Complete Guide to Flexbox</a>
+          </li>
+          <li>
+            <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties#toc-align-items" target="_blank">A Visual Guide to CSS3 Flexbox Properties</a>
+          </li>
+          <li>
+            <a href="https://www.toptal.com/front-end/how-to-build-css-only-smart-layouts-with-flexbox" target="_blank">How to Build CSS-only Smart Layouts with Flexbox</a>
+          </li>
+          <li>
+            <a href="https://www.tutorialspoint.com/flexbox/" target="_blank">Flexbox Tutorial</a>
+          </li>
+          <li>
+            <a href="https://yoksel.github.io/flex-cheatsheet/#section-flex-wrap" target="_blank">Flex Cheatsheet</a>
+          </li>
+          <li>
+            <a href="https://tympanus.net/codrops/css_reference/flexbox/" target="_blank">CSS Reference Concept - Flexbox</a>
+          </li>
+          <li>
+            <a href="https://medium.com/free-code-camp/an-animated-guide-to-flexbox-d280cf6afc35" target="_blank">How Flexbox works</a>
+          </li>
+          <li>
+            <a href="https://codepen.io/justd/pen/yydezN" target="_blank">Flexbox Properties Demonstration</a>
+          </li>
+        </ul>
+        <header>
+          <h5>CSS Flexbox: Real Use Cases</h5>
+        </header>
+        <ul>
+          <li>
+            <a href="https://ishadeed.com/article/flexbox-real-world-use-cases/" target="_blank">CSS Flexbox: 5 Real World Use Cases</a>
+          </li>
+          <li>
+            <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties#toc-align-items" target="_blank">A Visual Guide to CSS3 Flexbox Properties</a>
+          </li>
+          <li>
+            <a href="https://www.toptal.com/front-end/how-to-build-css-only-smart-layouts-with-flexbox" target="_blank">How to Build CSS-only Smart Layouts with Flexbox</a>
+          </li>
+          <li>
+            <a href="https://vegibit.com/css-flexbox-tutorial/" target="_blank">CSS Flexbox Tutorial</a>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <footer>Created by <a class="link" href="https://www.freecodecamp.org/digituar" target="_blank">DIGITUAR</a></footer>
+  </main>
+</body>
+</html>
